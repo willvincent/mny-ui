@@ -17,5 +17,3 @@ Vue.use(Buefy)
 // Buefy Overrides
 import Snackbar from './components/buefy-overrides/Snackbar'
 Vue.use(Snackbar)
-
-console.log(process.env)
