@@ -16,7 +16,7 @@
       <div class="navbar-start">
         <!-- primary menu links -->
         <div class="navbar-item has-dropdown is-hoverable" :class="{ 'is-active': hamburgerActive }">
-          <div class="navbar-link is-arrowless">
+          <div class="navbar-link" :class="{'is-arrowless': hamburgerActive}">
             <span>
               <i class="mdi mdi-18px mdi-account-multiple" />
               <span class="is-hidden-desktop"> Manage</span>
@@ -34,15 +34,15 @@
 
       <div class="navbar-end">
         <!-- user/contextual menu links -->
-        <div class="navbar-item has-dropdown" :class="{ 'is-active': accountMenuOpen }" @click="accountMenuOpen = !accountMenuOpen">
-          <div class="navbar-link">
+        <div class="navbar-item has-dropdown is-hoverable" :class="{ 'is-active': hamburgerActive }">
+          <div class="navbar-link" :class="{'is-arrowless': hamburgerActive}">
             <i class="mdi mdi-24px mdi-account-circle" />
             <span class="is-hidden-desktop"> User Account</span>
           </div>
-          <div class="navbar-dropdown is-right" :class="{'is-hidden-touch': !accountMenuOpen }">
-            <div class="navbar-item" @click="userMenuAction('logout')">
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item" @click="userMenuAction('logout')">
               <span><i class="mdi mdi-16px mdi-logout"></i> Logout</span>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -56,8 +56,6 @@ export default {
   data() {
     return {
       hamburgerActive: false,
-      userMenuOpen: false,
-      accountMenuOpen: false,
     }
   },
   methods: {
@@ -80,6 +78,10 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../assets/styles/main.scss';
+
+  .navbar {
+    box-shadow: 0px 2px rgba(0,0,0, 0.2);
+  }
   div.navbar-item {
     cursor: pointer;
     &.disabled {
