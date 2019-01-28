@@ -21,7 +21,7 @@ export default async function apiCall(
   options = {}
 ) {
   const requestUrl =
-    process.env.API_ENDPOINT +
+    process.env.VUE_APP_API_ENDPOINT +
     (options.full_path ? endpoint : `/api${endpoint}`);
 
   try {
@@ -71,7 +71,7 @@ export default async function apiCall(
       if (/^E_JWT_TOKEN_EXPIRED/.test(errorMsg)) {
         try {
           const response = await axios.post(
-            `${process.env.API_ENDPOINT}/auth/refresh-token`,
+            `${process.env.VUE_APP_API_ENDPOINT}/auth/refresh-token`,
             {
               refresh_token: store.state.auth.refresh_token,
             }
