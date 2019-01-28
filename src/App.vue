@@ -1,28 +1,41 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <template v-if="loggedIn">
+      <main-nav />
+      <breadcrumb show-home />
+      <div class="container is-fluid">
+        <transition :name="'fade'">
+          <router-view />
+        </transition>
+      </div>
+    </template>
+
+    <template v-else>
+      <section class="container fill-height">
+        <!-- <login-reset-form /> -->
+      </section>
+    </template>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Breadcrumb from './components/global/Breadcrumb.vue'
+import MainNav from './components/global/Navigation-Main.vue'
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    Breadcrumb,
+    MainNav,
+  },
+  data() {
+    return {
+      loggedIn: true
+    }
   }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
+<style lang="scss">
+  @import 'assets/styles/main.scss';
 </style>

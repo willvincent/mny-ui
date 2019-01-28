@@ -1,0 +1,71 @@
+// Import Bulma's core
+@import "~bulma/sass/utilities/_all";
+
+// Set your colors
+$primary-darkest: hsl(146, 35%, 28%);
+$primary-darker: hsl(146, 42%, 38%);
+$primary-dark: hsl(146,45%, 46%);
+$primary: hsl(146, 60%, 48%);
+$primary-light: hsl(146, 52%, 70%);
+$primary-lighter: hsl(146, 48%, 80%);
+$primary-lightest: hsl(146, 50%, 90%);
+$primary-invert: findColorInvert($primary);
+
+$neutral-darkest: hsl(180, 30%, 16%);
+$neutral-darker: hsl(180, 25%, 25%);
+$neutral-dark: hsl(180, 15%, 35%);
+$neutral: hsl(180, 15%, 45%);
+$neutral-light: hsl(180, 18%, 75%);
+$neutral-lighter: hsl(180, 18%, 86%);
+$neutral-lightest: hsl(180, 15%, 95%);
+$neutral-invert: findColorInvert($neutral);
+
+$success-darkest: hsl(190, 100%, 18%);
+$success-darker: hsl(188, 80%, 25%);
+$success-dark: hsl(188, 78%, 31%);
+$success: hsl(180, 85%, 34%);
+$success-light: hsl(180, 50%, 65%);
+$success-lighter: hsl(180, 65%, 80%);
+$success-lightest: hsl(180, 70%, 90%);
+$success-invert: findColorInvert($success);
+
+$warning-darkest: hsl(40, 80%, 20%);
+$warning-darker: hsl(40, 70%, 44%);
+$warning-dark: hsl(40, 70%, 50%);
+$warning: hsl(40, 85%, 58%);
+$warning-light: hsl(40, 85%, 73%);
+$warning-lighter: hsl(40, 80%, 83%);
+$warning-lightest: hsl(40, 80%, 90%);
+$warning-invert: findColorInvert($warning);
+
+$danger-darkest: hsl(340, 88%, 18%);
+$danger-darker: hsl(340, 70%, 25%);
+$danger-dark: hsl(342, 75%, 30%);
+$danger: hsl(346, 85%, 34%);
+$danger-light: hsl(346, 50%, 60%);
+$danger-lighter: hsl(346, 60%, 84%);
+$danger-lightest: hsl(346, 80%, 93%);
+$danger-invert: findColorInvert($danger);
+
+// Setup $colors to use as bulma classes (e.g. 'is-twitter')
+$colors: (
+    "white": ($white, $black),
+    "black": ($black, $white),
+    "light": ($neutral-light, findColorInvert($neutral-light)),
+    "lighter": ($neutral-lighter, findColorInvert($neutral-lighter)),
+    "dark": ($neutral-dark, findColorInvert($neutral-dark)),
+    "darker": ($neutral-darker, findColorInvert($neutral-darker)),
+    "primary": ($primary, $primary-invert),
+    "success": ($success, $success-invert),
+    "warning": ($warning, $warning-invert),
+    "danger": ($danger, $danger-invert),
+);
+
+// Links
+$link: $primary-dark;
+$link-invert: $primary-invert;
+$link-focus-border: $primary;
+
+// Import Bulma and Buefy styles
+@import "~bulma";
+@import "~buefy/src/scss/buefy";
