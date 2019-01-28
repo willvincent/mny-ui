@@ -1,21 +1,31 @@
 <template>
-    <transition
-        :enter-active-class="transition.enter"
-        :leave-active-class="transition.leave">
-        <div
-            v-show="isActive"
-            class="snackbar"
-            :class="[type,position]">
-            <p class="text">{{ message }}</p>
-            <div
-                v-if="actionText"
-                class="action"
-                @click="action"
-                :class="[type + '-inverted']">
-                <button class="button" :class="type">{{ actionText }}</button>
-            </div>
-        </div>
-    </transition>
+  <transition
+    :enter-active-class="transition.enter"
+    :leave-active-class="transition.leave"
+  >
+    <div
+      v-show="isActive"
+      class="snackbar"
+      :class="[type,position]"
+    >
+      <p class="text">
+        {{ message }}
+      </p>
+      <div
+        v-if="actionText"
+        class="action"
+        :class="[type + '-inverted']"
+        @click="action"
+      >
+        <button
+          class="button"
+          :class="type"
+        >
+          {{ actionText }}
+        </button>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>

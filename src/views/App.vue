@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import Breadcrumb from './components/global/Breadcrumb.vue'
-import MainNav from './components/global/Navigation-Main.vue'
+import Breadcrumb from '@/components/global/Breadcrumb.vue'
+import MainNav from '@/components/global/Navigation-Main.vue'
 
 export default {
   components: {
@@ -37,5 +37,5 @@ export default {
 
 
 <style lang="scss">
-  @import 'assets/styles/main.scss';
+  @import '@/assets/styles/main.scss';
 </style>

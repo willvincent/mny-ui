@@ -12,3 +12,9 @@ html, body {
     background: $white !important;
   }
 }
+
+section.content {
+  padding: 2rem;
+  background: $neutral-lightest;
+  border-radius: 4px;
+}

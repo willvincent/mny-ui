@@ -1,5 +1,10 @@
 <template>
-  <nav role="navigation" class="breadcrumb" aria-label="breadcrumbs"  v-if="crumbs.length || (showHome && $route.path !== '/')">
+  <nav
+    v-if="crumbs.length || (showHome && $route.path !== '/')"
+    role="navigation"
+    class="breadcrumb"
+    aria-label="breadcrumbs"
+  >
     <div class="container is-fluid">
       <ul>
         <!-- Home -->
@@ -8,7 +13,7 @@
           tag="li"
           to="/"
         >
-          <a><span><i class="mdi mdi-16px mdi-home"></i></span></a>
+          <a><span><i class="mdi mdi-16px mdi-home" /></span></a>
         </router-link>
 
         <!-- Breadcrumbs -->
@@ -18,7 +23,11 @@
         >
           <router-link :to="crumb.path">
             <span>
-              <i v-if="crumb.icon" class="mdi mdi-16px" :class="['mdi-' + crumb.icon]"></i>
+              <i
+                v-if="crumb.icon"
+                class="mdi mdi-16px"
+                :class="['mdi-' + crumb.icon]"
+              />
               {{ crumb.name }}
             </span>
           </router-link>
@@ -26,9 +35,16 @@
 
         <!-- Current Page -->
         <li class="is-active">
-          <router-link :to="$route.path" aria-current="page">
+          <router-link
+            :to="$route.path"
+            aria-current="page"
+          >
             <span>
-              <i v-if="$route.meta.icon" class="mdi mdi-16px" :class="['mdi-' + $route.meta.icon]"></i>
+              <i
+                v-if="$route.meta.icon"
+                class="mdi mdi-16px"
+                :class="['mdi-' + $route.meta.icon]"
+              />
               {{ $route.name }}
             </span>
           </router-link>
