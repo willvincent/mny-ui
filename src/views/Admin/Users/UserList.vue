@@ -135,6 +135,7 @@
 
 <script>
 import Search from '@/components/global/Search.vue';
+import apiCall from '@/api/api-call';
 
 export default {
   name: 'AdminUserList',
@@ -168,12 +169,18 @@ export default {
 
     async fetchUsers(page = 1) {
       this.isLoading = true;
-      const result = await fetch(`http://localhost:3333/api/users?page=${page}&perPage=${this.perPage}&sort=${this.sort}&direction=${this.direction}${this.search ? '&search=' + this.search : ''}`);
-      const data = await result.json();
-      this.page = data.page;
-      this.perPage = data.perPage;
-      this.total = Number(data.total);
-      this.users = data.data;
+      const params = {
+        page: page,
+        perPage: this.perPage,
+        sort: this.sort,
+        direction: this.direction,
+        search: this.search,
+      }
+      const result = await apiCall('GET', '/users', params)
+      this.page = result.page;
+      this.perPage = result.perPage;
+      this.total = Number(result.total);
+      this.users = result.data;
       this.isLoading = false;
     },
 
