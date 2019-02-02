@@ -11,8 +11,8 @@
     </template>
 
     <template v-else>
-      <section class="container fill-height">
-        <!-- <login-reset-form /> -->
+      <section class="hero is-lighter is-fullheight">
+        <login-form />
       </section>
     </template>
   </div>
@@ -20,16 +20,18 @@
 
 <script>
 import Breadcrumb from '@/components/global/Breadcrumb.vue'
+import LoginForm from '@/components/global/LoginForm.vue'
 import MainNav from '@/components/global/Navigation-Main.vue'
 
 export default {
   components: {
     Breadcrumb,
+    LoginForm,
     MainNav,
   },
   data() {
     return {
-      loggedIn: true
+      loggedIn: false
     }
   }
 }
