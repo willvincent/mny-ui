@@ -1,5 +1,5 @@
 import { Exception, exceptions } from '@/exceptions';
-import { login, logout } from '@/api/auth';
+import { forgotPassword, login, logout } from '@/api/auth';
 import * as mutation from './mutation-types';
 
 const get_user = () => {};
@@ -66,8 +66,25 @@ const auth_store = {
       commit('set_impersonating', true);
     },
 
-    password_reset_request({ commit }, value) {
-      commit('password_reset_request', value);
+    async password_reset_request({ commit }, { email }) {
+      commit(mutation.AUTH_BUSY);
+      try {
+        commit('password_reset_request', await forgotPassword({ email }));
+      } catch (e) {
+        commit(mutation.AUTH_BUSY, false);
+        let exception;
+
+        switch (e.message) {
+          case 'Unauthorized':
+            exception = new Exception(exceptions.auth.NotAllowed);
+            break;
+          default:
+            exception = new Exception(exceptions.UnknownException, e);
+            break;
+        }
+
+        throw exception;
+      }
     },
 
     async logout({ commit }, { invalid_session } = {}) {
@@ -114,6 +131,7 @@ const auth_store = {
     // @FIXME: the below should be mutation constants like above
     password_reset_request(state, value) {
       state.password_reset_request = value;
+      state.auth_busy = false;
     },
 
     set_impersonating(state, value) {

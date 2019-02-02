@@ -107,24 +107,25 @@ export default {
         return this.$toast.open({
           message: 'Please enter a valid email address and password',
           type: 'is-warning',
-        })
+        });
       }
 
 
       try {
         await this.$store.dispatch('auth/login', {
           ...this.form
-        })
+        });
 
         // this.$router.push(userDefaultPath(this.$router))
       } catch (error) {
-        // this.loading.close()
         this.$toast.open({
           title: 'Invalid Login',
           message:
             'Either the username or password you supplied is incorrect. Please try again.',
           type: 'is-danger'
         });
+
+        console.error(error);
       }
     },
     resetForm() {
@@ -142,25 +143,29 @@ export default {
         return this.$toast.open({
           message: 'Please enter a valid email address',
           type: 'is-warning',
-        })
+        });
       }
 
       try {
-        // await this.$store.dispatch('auth/')
+        await this.$store.dispatch('auth/password_reset_request', {
+          ...this.form
+        });
 
         this.$snackbar.open({
           message: 'An email has been sent to you with password reset instructions.',
           type: 'is-primary',
-        })
+        });
+
+        this.resetForm();
+        this.forgotPassword = false;
       } catch (error) {
-        this.$toast.open({
+        this.$snackbar.open({
           message: 'Unable to process your request',
           type: 'is-danger',
-        })
-      }
+        });
 
-      this.resetForm();
-      this.forgotPassword = false;
+        console.error(error);
+      }
     }
   },
 }

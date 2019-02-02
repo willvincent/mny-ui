@@ -15,6 +15,7 @@ export const exceptions = {
   auth: {
     InvalidLogin: 'InvalidLogin',
     LoginDisabled: 'LoginDisabled',
+    NotAllowed: 'NotAllowed',
   },
   UnknownException: 'UnknownException',
 };
