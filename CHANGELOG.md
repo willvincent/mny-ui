@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* **Login:** Issue [#1](https://github.com/willvincent/mny-ui/issues/1) - Add Login / Forgot Password Form ([#6](https://github.com/willvincent/mny-ui/issues/6)) ([0d4cdc2](https://github.com/willvincent/mny-ui/commit/0d4cdc2))
+* **Login:** Add Login / Forgot Password Form ([#6](https://github.com/willvincent/mny-ui/issues/6)) ([0d4cdc2](https://github.com/willvincent/mny-ui/commit/0d4cdc2))
 
 
 
