@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="loggedIn">
+    <template v-if="logged_in">
       <main-nav />
       <breadcrumb show-home />
       <div class="container is-fluid">
@@ -23,6 +23,8 @@ import Breadcrumb from '@/components/global/Breadcrumb.vue'
 import LoginForm from '@/components/global/LoginForm.vue'
 import MainNav from '@/components/global/Navigation-Main.vue'
 
+import { mapState } from 'vuex';
+
 export default {
   components: {
     Breadcrumb,
@@ -31,9 +33,26 @@ export default {
   },
   data() {
     return {
-      loggedIn: false
+      loading: null,
     }
-  }
+  },
+  computed: {
+    ...mapState('auth', ['logged_in', 'auth_busy'])
+  },
+  watch: {
+    auth_busy: {
+      handler(busy) {
+        if (busy) {
+          this.loading = this.$loading.open()
+        } else {
+          if (this.loading !== null) {
+            this.loading.close()
+          }
+        }
+      },
+      immediate: true,
+    },
+  },
 }
 </script>
 
