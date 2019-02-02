@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-cloak>
     <template v-if="logged_in">
       <main-nav />
       <breadcrumb show-home />
@@ -12,7 +12,8 @@
 
     <template v-else>
       <section class="hero is-fullheight">
-        <login-form />
+        <router-view v-if="authRoute" />
+        <login-form v-else />
       </section>
     </template>
   </div>
@@ -37,16 +38,19 @@ export default {
     }
   },
   computed: {
-    ...mapState('auth', ['logged_in', 'auth_busy'])
+    ...mapState('auth', ['logged_in', 'auth_busy']),
+    authRoute() {
+      return this.$route.meta.auth_route;
+    },
   },
   watch: {
     auth_busy: {
       handler(busy) {
         if (busy) {
-          this.loading = this.$loading.open()
+          this.loading = this.$loading.open();
         } else {
           if (this.loading !== null) {
-            this.loading.close()
+            this.loading.close();
           }
         }
       },
