@@ -11,7 +11,7 @@
     </template>
 
     <template v-else>
-      <section class="hero is-lighter is-fullheight">
+      <section class="hero is-fullheight">
         <login-form />
       </section>
     </template>
@@ -39,5 +39,5 @@ export default {
 
 
 <style lang="scss">
-  @import '@/assets/styles/main.scss';
+  @import '@/assets/styles/main.scss'
 </style>
