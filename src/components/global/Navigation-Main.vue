@@ -103,7 +103,7 @@ export default {
     userMenuAction(command) {
       switch (command) {
         case 'logout':
-          // this.$store.dispatch('auth/logout');
+          this.$store.dispatch('auth/logout');
           break;
 
         default:
