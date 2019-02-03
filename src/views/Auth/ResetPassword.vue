@@ -80,8 +80,6 @@
 
 
 <script>
-import zxcvbn from 'zxcvbn';
-
 export default {
   data() {
     return {
@@ -111,8 +109,13 @@ export default {
 
     }
   },
-  created() {
+  async created() {
+    const busy = this.$loading.open()
     this.token = this.$route.params.pathMatch
+
+    this.zxcvbn = (await import(/* webpackChunkName: "zxcvbn" */ 'zxcvbn')).default
+
+    busy.close()
   },
   methods: {
     async updatePassword() {
@@ -151,13 +154,15 @@ export default {
   },
   watch: {
     'form.password'(value) {
-      const strength = zxcvbn(value)
-      this.passwordStrength = strength.score * 25;
-      if (strength.score === 0 && this.form.password) {
-        this.passwordStrength = 7;
+      if (typeof this.zxcvbn === 'function') {
+        const strength = this.zxcvbn(value)
+        this.passwordStrength = strength.score * 25;
+        if (strength.score === 0 && this.form.password) {
+          this.passwordStrength = 7;
+        }
+        this.passwordSuggestions = strength.feedback.suggestions;
+        this.passwordWarning = strength.feedback.warning;
       }
-      this.passwordSuggestions = strength.feedback.suggestions;
-      this.passwordWarning = strength.feedback.warning;
     }
   }
 }
