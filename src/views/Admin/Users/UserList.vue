@@ -129,11 +129,11 @@
 
             <b-dropdown-item
               custom
-              class="is-hidden-tablet"
+              class="is-hidden-desktop"
             >
             <h3 class="has-text-left">Manage {{ props.row.first_name }} {{ props.row.last_name }}</h3>
             </b-dropdown-item>
-            <b-dropdown-item class="is-hidden-tablet" separator />
+            <b-dropdown-item class="is-hidden-desktop" separator />
 
             <b-dropdown-item
               :value="{ action: 'edit', item: props.row }"
@@ -317,7 +317,7 @@ export default {
 </script>
 
 <style lang="scss">
-  .is-hidden-tablet h3.has-text-left {
+  .is-hidden-desktop h3.has-text-left {
     margin: 0 !important;
   }
 </style>
