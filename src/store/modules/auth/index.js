@@ -1,5 +1,5 @@
 import { Exception, exceptions } from '@/exceptions';
-import { forgotPassword, login, logout, resetPassword } from '@/api/auth';
+import { forgotPassword, login, logout, resetPassword, verifyEmail } from '@/api/auth';
 import * as mutation from './mutation-types';
 
 const get_user = () => {};
@@ -92,6 +92,30 @@ const auth_store = {
 
       try {
         commit(mutation.LOGIN, await resetPassword({ token, password, password_confirmation }));
+      } catch (e) {
+        commit(mutation.AUTH_BUSY, false);
+        let exception;
+
+        switch (e.message) {
+          case 'Invalid password':
+          case 'Unable to locate user':
+          case 'required validation failed on uid':
+            exception = new Exception(exceptions.auth.InvalidLogin);
+            break;
+          default:
+            exception = new Exception(exceptions.UnknownException, e);
+            break;
+        }
+
+        throw exception;
+      }
+    },
+
+    async verify_email({ commit }, { token }) {
+      commit(mutation.AUTH_BUSY);
+
+      try {
+        commit(mutation.LOGIN, await verifyEmail({ token }));
       } catch (e) {
         commit(mutation.AUTH_BUSY, false);
         let exception;
