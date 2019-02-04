@@ -55,6 +55,12 @@
             >
               <span><i class="mdi mdi-16px mdi-view-list" /> User List</span>
             </router-link>
+            <router-link
+              class="navbar-item"
+              to="/admin/users/add"
+            >
+              <span><i class="mdi mdi-16px mdi-account-plus" /> Add User</span>
+            </router-link>
           </div>
         </div>
       </div>

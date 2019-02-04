@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import AdminRoutes from './admin'
 import AuthRoutes from './auth'
+import UserRoutes from './user'
 
 Vue.use(Router)
 
@@ -20,5 +21,6 @@ export default new Router({
 
     ...AdminRoutes,
     ...AuthRoutes,
+    ...UserRoutes,
   ]
 })

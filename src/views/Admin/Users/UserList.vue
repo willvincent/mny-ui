@@ -8,7 +8,7 @@
           </p>
         </div>
       </div>
-      
+
       <div class="level-right">
         <div class="level-item">
           <b-pagination
@@ -114,6 +114,50 @@
         >
           {{ new Date(props.row.updated_at).toLocaleDateString() }}
         </b-table-column>
+        <b-table-column
+          width="40"
+        >
+          <b-dropdown
+            position="is-bottom-left"
+            @change="userAction"
+            v-model="dropDownAction"
+          >
+            <a class="button is-small" slot="trigger">
+                <span><b-icon custom-size="mdi-18px" icon="dots-vertical" /></span>
+                <span class="is-hidden-tablet">&nbsp;Manage User</span>
+            </a>
+
+            <b-dropdown-item
+              custom
+              class="is-hidden-tablet"
+            >
+            <h3 class="has-text-left">Manage {{ props.row.first_name }} {{ props.row.last_name }}</h3>
+            </b-dropdown-item>
+            <b-dropdown-item class="is-hidden-tablet" separator />
+
+            <b-dropdown-item
+              :value="{ action: 'edit', item: props.row }"
+            >
+              <b-icon icon="account-edit" /> Edit
+            </b-dropdown-item>
+            <b-dropdown-item
+              :value="{ action: props.row.account_status !== 'disabled' ? 'disable' : 'enable', item: props.row }"
+            >
+              <span v-if="props.row.account_status !== 'disabled'">
+                <b-icon icon="account-off" /> Disable
+              </span>
+              <span v-else>
+                <b-icon icon="account-convert" /> Enable
+              </span>
+            </b-dropdown-item>
+            <b-dropdown-item
+              :value="{ action: 'remove', item: props.row }"
+            >
+              <b-icon icon="account-remove" /> Delete
+            </b-dropdown-item>
+          </b-dropdown>
+
+        </b-table-column>
       </template>
 
       <template slot="empty">
@@ -135,7 +179,7 @@
 
 <script>
 import Search from '@/components/global/Search.vue';
-import apiCall from '@/api/api-call';
+import { userList, updateUser, removeUser } from '@/api/users';
 
 export default {
   name: 'AdminUserList',
@@ -152,6 +196,7 @@ export default {
       search: null,
       sort: 'last_name',
       direction: 'asc',
+      dropDownAction: null,
     }
   },
 
@@ -176,7 +221,8 @@ export default {
         direction: this.direction,
         search: this.search,
       }
-      const result = await apiCall('GET', '/users', params)
+
+      const result = await userList(params)
       this.page = result.page;
       this.perPage = result.perPage;
       this.total = Number(result.total);
@@ -187,6 +233,91 @@ export default {
     updatePage(value) {
       this.fetchUsers(value)
     },
+
+    async userAction({ action, item }) {
+      switch (action) {
+        case 'edit':
+          this.$router.push(`/admin/users/edit/${item.id}`);
+          break;
+        case 'enable':
+        case 'disable':
+          if (item.id === this.$store.state.auth.myUserId) {
+            return this.$toast.open({
+              message: `You cannot ${action} yourself.`,
+              type: 'is-warning',
+            })
+          }
+          this.$dialog.confirm({
+            title: `${action === 'enable' ? 'Enabling' : 'Disabling'} ${item.first_name} ${item.last_name}`,
+            message: `Are you sure you want to <b>${action}</b> this user?`,
+            confirmText: 'Yes',
+            type: 'is-warning',
+            hasIcon: true,
+            onConfirm: async () => {
+              let account_status = item.account_status
+              if (item.account_status === 'disabled') {
+                account_status = 'active';
+              } else {
+                account_status = 'disabled';
+              }
+              try {
+                await updateUser(item.id, { account_status })
+                item.account_status = account_status;
+                this.$toast.open({
+                  message: `User ${action}d`,
+                  type: 'is-primary',
+                })
+              } catch (error) {
+                this.$toast.open({
+                  message: 'Unable to process your request',
+                  type: 'is-danger',
+                })
+              }
+            }
+          });
+          break;
+        case 'remove':
+          if (item.id === this.$store.state.auth.myUserId) {
+            return this.$toast.open({
+              message: `You cannot delete yourself.`,
+              type: 'is-warning',
+            })
+          }
+          this.$dialog.confirm({
+            title: `Deleting ${item.first_name} ${item.last_name}`,
+            message: 'Are you sure you want to <b>delete</b> this user?',
+            confirmText: 'Delete Account',
+            type: 'is-danger',
+            hasIcon: true,
+            onConfirm: async () => {
+              try {
+                await removeUser(item.id)
+                this.updatePage(this.page)
+                this.$toast.open({
+                  message: `User has been deleted`,
+                  type: 'is-primary',
+                })
+              } catch (error) {
+                this.$toast.open({
+                  message: 'Unable to process your request',
+                  type: 'is-danger',
+                })
+              }
+            }
+          });
+          break;
+        default:
+          break;
+      }
+
+      this.dropDownAction = null;
+    },
   }
 }
 </script>
+
+<style lang="scss">
+  .is-hidden-tablet h3.has-text-left {
+    margin: 0 !important;
+  }
+</style>
