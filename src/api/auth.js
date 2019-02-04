@@ -77,3 +77,22 @@ export async function forgotPassword({ email }, options) {
     }
   );
 }
+
+/**
+ *
+ * @param data
+ * @param data.email
+ * @param options
+ */
+export async function verifyEmail({ token }, options) {
+  return apiCall(
+    'POST',
+    '/auth/verify-email',
+    null,
+    { token },
+    {
+      ...options,
+      full_path: true,
+    }
+  );
+}

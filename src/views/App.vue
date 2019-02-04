@@ -1,6 +1,6 @@
 <template>
   <div v-cloak>
-    <template v-if="logged_in">
+    <template v-if="logged_in && !authRoute">
       <main-nav />
       <breadcrumb show-home />
       <div class="container is-fluid">
