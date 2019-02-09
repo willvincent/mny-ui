@@ -695,6 +695,20 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@riophae/vue-treeselect@^0.0.38":
+  version "0.0.38"
+  resolved "http://registry.npm.taobao.org/@riophae/vue-treeselect/download/@riophae/vue-treeselect-0.0.38.tgz#13af5dfcd732a9f41fa96f99821108e72666dd4f"
+  integrity sha1-E69d/NcyqfQfqW+ZghEI5yZm3U8=
+  dependencies:
+    "@babel/runtime" "^7.0.0"
+    babel-helper-vue-jsx-merge-props "^2.0.3"
+    easings-css "^1.0.0"
+    fuzzysearch "^1.0.3"
+    is-promise "^2.1.0"
+    lodash "^4.0.0"
+    material-colors "^1.2.6"
+    watch-size "^2.0.0"
+
 "@types/q@^1.5.1":
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.1.tgz#48fd98c1561fe718b61733daed46ff115b496e18"
@@ -3185,6 +3199,21 @@ dotgitignore@^1.0.3:
     find-up "^2.1.0"
     minimatch "^3.0.4"
 
+drag-event-service@0.0.6:
+  version "0.0.6"
+  resolved "http://registry.npm.taobao.org/drag-event-service/download/drag-event-service-0.0.6.tgz#9c3eba46e8be66d3652fc0301a51821e5fb43deb"
+  integrity sha1-nD66Rui+ZtNlL8AwGlGCHl+0Pes=
+  dependencies:
+    helper-js "^1.2.0"
+
+draggable-helper@^1.0.19:
+  version "1.0.19"
+  resolved "http://registry.npm.taobao.org/draggable-helper/download/draggable-helper-1.0.19.tgz#4de98494701fb63270cf52e20b06163d3d06c64d"
+  integrity sha1-TemElHAftjJwz1LiCwYWPT0Gxk0=
+  dependencies:
+    drag-event-service "0.0.6"
+    helper-js "^1.3.0"
+
 duplexer@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
@@ -3199,6 +3228,11 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
+
+easings-css@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/easings-css/download/easings-css-1.0.0.tgz#dde569003bb7a4a0c0b77878f5db3e0be5679c81"
+  integrity sha1-3eVpADu3pKDAt3h49ds+C+VnnIE=
 
 easy-stack@^1.0.0:
   version "1.0.0"
@@ -4144,6 +4178,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+fuzzysearch@^1.0.3:
+  version "1.0.3"
+  resolved "http://registry.npm.taobao.org/fuzzysearch/download/fuzzysearch-1.0.3.tgz#dffc80f6d6b04223f2226aa79dd194231096d008"
+  integrity sha1-3/yA9tawQiPyImqnndGUIxCW0Ag=
+
 gauge@~2.7.3:
   version "2.7.4"
   resolved "https://registry.yarnpkg.com/gauge/-/gauge-2.7.4.tgz#2c03405c7538c39d7eb37b317022e325fb018bf7"
@@ -4451,6 +4490,11 @@ he@1.2.x, he@^1.1.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
+
+helper-js@^1.0.47, helper-js@^1.2.0, helper-js@^1.3.0, helper-js@^1.3.1:
+  version "1.3.1"
+  resolved "http://registry.npm.taobao.org/helper-js/download/helper-js-1.3.1.tgz#326b57814c0baabea8c4b9a58d40661154914f56"
+  integrity sha1-MmtXgUwLqr6oxLmljUBmEVSRT1Y=
 
 hex-color-regex@^1.1.0:
   version "1.1.0"
@@ -5628,6 +5672,11 @@ map-visit@^1.0.0:
   integrity sha1-7Nyo8TFE5mDxtb1B8S80edmN+48=
   dependencies:
     object-visit "^1.0.0"
+
+material-colors@^1.2.6:
+  version "1.2.6"
+  resolved "http://registry.npm.taobao.org/material-colors/download/material-colors-1.2.6.tgz#6d1958871126992ceecc72f4bcc4d8f010865f46"
+  integrity sha1-bRlYhxEmmSzuzHL0vMTY8BCGX0Y=
 
 md5.js@^1.3.4:
   version "1.3.5"
@@ -8553,6 +8602,13 @@ tough-cookie@~2.4.3:
     psl "^1.1.24"
     punycode "^1.4.1"
 
+tree-helper@^1.0.5:
+  version "1.0.5"
+  resolved "http://registry.npm.taobao.org/tree-helper/download/tree-helper-1.0.5.tgz#0abdc741e906866ff35fa534cd2e75935c159dca"
+  integrity sha1-Cr3HQekGhm/zX6U0zS51k1wVnco=
+  dependencies:
+    helper-js "^1.0.47"
+
 trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
@@ -8850,6 +8906,17 @@ vue-cleave@^1.2.2:
   dependencies:
     cleave.js "^0.7.15"
 
+vue-draggable-nested-tree@^2.2.5:
+  version "2.2.5"
+  resolved "http://registry.npm.taobao.org/vue-draggable-nested-tree/download/vue-draggable-nested-tree-2.2.5.tgz#6660b5168c571eeaf2bd4fd9e7aefbaffe295f5e"
+  integrity sha1-ZmC1FoxXHuryvU/Z5677r/4pX14=
+  dependencies:
+    draggable-helper "^1.0.19"
+    helper-js "^1.3.1"
+    tree-helper "^1.0.5"
+    vue "^2.5.21"
+    vue-functions "^1.0.1"
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -8873,6 +8940,13 @@ vue-eslint-parser@^4.0.2:
     espree "^4.1.0"
     esquery "^1.0.1"
     lodash "^4.17.11"
+
+vue-functions@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/vue-functions/download/vue-functions-1.0.1.tgz#302ebdf482961c925edee5933126ba368b7cc80f"
+  integrity sha1-MC699IKWHJJe3uWTMSa6Not8yA8=
+  dependencies:
+    helper-js "^1.3.1"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.1"
@@ -8933,6 +9007,11 @@ vuex@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.0.tgz#634b81515cf0cfe976bd1ffe9601755e51f843b9"
   integrity sha512-mdHeHT/7u4BncpUZMlxNaIdcN/HIt1GsGG5LKByArvYG/v6DvHcOxvDCts+7SRdCoIRGllK8IMZvQtQXLppDYg==
+
+watch-size@^2.0.0:
+  version "2.0.0"
+  resolved "http://registry.npm.taobao.org/watch-size/download/watch-size-2.0.0.tgz#096ee28d0365bd7ea03d9c8bf1f2f50a73be1474"
+  integrity sha1-CW7ijQNlvX6gPZyL8fL1CnO+FHQ=
 
 watchpack@^1.5.0:
   version "1.6.0"

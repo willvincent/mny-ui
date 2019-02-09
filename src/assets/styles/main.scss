@@ -18,3 +18,35 @@ section.content {
   background: $neutral-lightest;
   border-radius: 4px;
 }
+
+
+.vue-treeselect__multi-value-item {
+  border: 1px dotted $primary-dark;
+  color: $primary-darker;
+  background: $primary-lightest;
+  font-size: .85rem;
+  &:hover {
+    color: $primary-darkest;
+    background: $neutral-lighter;
+    .vue-treeselect__icon.vue-treeselect__value-remove {
+      color: $danger;
+    }
+  }
+  .vue-treeselect__icon.vue-treeselect__value-remove {
+    color: $primary-darker;
+  }
+}
+
+.vue-treeselect__label-container:hover .vue-treeselect__checkbox--unchecked {
+  border-color: $primary-dark !important;
+}
+
+.vue-treeselect__checkbox--checked,
+.vue-treeselect__checkbox--indeterminate {
+  border-color: $primary-dark !important;
+  background: $primary-dark !important;
+  &:hover {
+    border-color: $primary-dark !important;
+    background: $primary-dark !important;
+  }
+}
