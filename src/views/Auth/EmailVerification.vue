@@ -1,5 +1,8 @@
 <template>
-  <div class="hero-body" v-if="invalid">
+  <div
+    v-if="invalid"
+    class="hero-body"
+  >
     <div class="container">
       <h1 class="title">
         <b-icon

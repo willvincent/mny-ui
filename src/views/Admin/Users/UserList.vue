@@ -118,22 +118,37 @@
           width="40"
         >
           <b-dropdown
+            v-model="dropDownAction"
             position="is-bottom-left"
             @change="userAction"
-            v-model="dropDownAction"
           >
-            <a class="button is-small" slot="trigger">
-                <span><b-icon custom-size="mdi-18px" icon="dots-vertical" /></span>
-                <span class="is-hidden-tablet">&nbsp;Manage User</span>
+            <a
+              slot="trigger"
+              class="button is-small"
+            >
+              <span>
+                <b-icon
+                  custom-size="mdi-18px"
+                  icon="dots-vertical"
+                />
+              </span>
+              <span class="is-hidden-tablet">
+                &nbsp;Manage User
+              </span>
             </a>
 
             <b-dropdown-item
               custom
               class="is-hidden-desktop"
             >
-            <h3 class="has-text-left">Manage {{ props.row.first_name }} {{ props.row.last_name }}</h3>
+              <h3 class="has-text-left">
+                Manage {{ props.row.first_name }} {{ props.row.last_name }}
+              </h3>
             </b-dropdown-item>
-            <b-dropdown-item class="is-hidden-desktop" separator />
+            <b-dropdown-item
+              class="is-hidden-desktop"
+              separator
+            />
 
             <b-dropdown-item
               :value="{ action: 'edit', item: props.row }"
@@ -156,7 +171,6 @@
               <b-icon icon="account-remove" /> Delete
             </b-dropdown-item>
           </b-dropdown>
-
         </b-table-column>
       </template>
 

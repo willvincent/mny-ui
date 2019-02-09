@@ -12,8 +12,8 @@
           <form>
             <b-field class="password">
               <b-input
-                type="password"
                 v-model="form.password"
+                type="password"
                 placeholder="New Password"
                 icon="lock"
                 password-reveal
@@ -28,10 +28,13 @@
             />
 
             <div
-              class="content has-text-left password-feedback"
               v-if="passwordSuggestions.length > 0 && form.password"
+              class="content has-text-left password-feedback"
             >
-              <p v-if="passwordWarning" class="warning">
+              <p
+                v-if="passwordWarning"
+                class="warning"
+              >
                 <strong>Warning:</strong>
                 {{ passwordWarning }}
               </p>
@@ -47,8 +50,8 @@
 
             <b-field class="password-confirm">
               <b-input
-                type="password"
                 v-model="form.password_confirmation"
+                type="password"
                 placeholder="Confirm Password"
                 icon="lock"
                 password-reveal
@@ -58,8 +61,8 @@
 
             <button
               :disabled="notReady"
-              @click.prevent="updatePassword()"
               class="button is-block is-primary is-large is-fullwidth"
+              @click.prevent="updatePassword()"
             >
               Update Password
             </button>
@@ -109,6 +112,19 @@ export default {
 
     }
   },
+  watch: {
+    'form.password'(value) {
+      if (typeof this.zxcvbn === 'function') {
+        const strength = this.zxcvbn(value)
+        this.passwordStrength = strength.score * 25;
+        if (strength.score === 0 && this.form.password) {
+          this.passwordStrength = 7;
+        }
+        this.passwordSuggestions = strength.feedback.suggestions;
+        this.passwordWarning = strength.feedback.warning;
+      }
+    }
+  },
   async created() {
     const busy = this.$loading.open()
     this.token = this.$route.params.pathMatch
@@ -150,19 +166,6 @@ export default {
         password: null,
         password_confirmation: null,
       };
-    }
-  },
-  watch: {
-    'form.password'(value) {
-      if (typeof this.zxcvbn === 'function') {
-        const strength = this.zxcvbn(value)
-        this.passwordStrength = strength.score * 25;
-        if (strength.score === 0 && this.form.password) {
-          this.passwordStrength = 7;
-        }
-        this.passwordSuggestions = strength.feedback.suggestions;
-        this.passwordWarning = strength.feedback.warning;
-      }
     }
   }
 }

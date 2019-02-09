@@ -4,8 +4,12 @@
       <div class="level-left">
         <div class="level-item">
           <p class="subtitle is-5">
-            <span v-if="uid">Edit</span>
-            <span v-else>Add</span>
+            <span v-if="uid">
+              Edit
+            </span>
+            <span v-else>
+              Add
+            </span>
             User
           </p>
         </div>
@@ -33,6 +37,30 @@
       </div>
     </nav>
     <pre>{{ user }}</pre>
+
+    <div class="level-item">
+      <treeselect
+        v-model="value"
+        :multiple="true"
+        :options="options"
+        :searchable="false"
+        sort-value-by="INDEX"
+      >
+        <label
+          slot="option-label"
+          slot-scope="{ node, labelClassName }"
+          :class="labelClassName"
+        >
+          {{ node.raw.name }}
+        </label>
+        <label
+          slot="value-label"
+          slot-scope="{ node }"
+        >
+          {{ label(node) }}
+        </label>
+      </treeselect>
+    </div>
   </section>
 </template>
 
@@ -66,6 +94,20 @@ export default {
       },
       immediate: true,
     }
+  },
+  async mounted() {
+    this.options = await practiceAreas();
+  },
+  methods: {
+    label(node) {
+      let label = node.raw.name
+      if (node.ancestors) {
+        for (const a of node.ancestors) {
+          label = `${a.raw.name} / ${label}`
+        }
+      }
+      return label
+    },
   }
 }
 </script>

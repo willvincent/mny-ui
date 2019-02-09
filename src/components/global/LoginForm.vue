@@ -2,7 +2,10 @@
   <div class="hero-body">
     <div class="container has-text-centered">
       <div class="column is-4 is-offset-4">
-        <div v-if="!forgotPassword" class="title">
+        <div
+          v-if="!forgotPassword"
+          class="title"
+        >
           <h3 class="title has-text-grey">
             Login
           </h3>
@@ -10,7 +13,10 @@
             Please login to proceed.
           </p>
         </div>
-        <div v-else class="title">
+        <div
+          v-else
+          class="title"
+        >
           <h3 class="title has-text-grey">
             Forgot Password
           </h3>
@@ -20,9 +26,9 @@
             <form>
               <b-field>
                 <b-input
-                  type="email"
                   ref="email"
                   v-model="form.email"
+                  type="email"
                   placeholder="Email"
                   icon="email"
                   autofocus=""
@@ -31,8 +37,8 @@
 
               <b-field>
                 <b-input
-                  type="password"
                   v-model="form.password"
+                  type="password"
                   placeholder="Password"
                   icon="lock"
                   password-reveal
@@ -40,8 +46,8 @@
                 />
               </b-field>
               <button
-                @click.prevent="login()"
                 class="button is-block is-primary is-large is-fullwidth"
+                @click.prevent="login()"
               >
                 Login
               </button>
@@ -51,17 +57,17 @@
             <form>
               <b-field>
                 <b-input
-                  type="email"
                   ref="email"
                   v-model="form.email"
+                  type="email"
                   placeholder="Email"
                   icon="email"
                   autofocus=""
                 />
               </b-field>
               <button
-                @click.prevent="passwordReset()"
                 class="button is-block is-primary is-large is-fullwidth"
+                @click.prevent="passwordReset()"
               >
                 Send Reset Instructions
               </button>
@@ -73,7 +79,11 @@
             Sign Up
           </a> &nbsp;·&nbsp; -->
           <a @click="resetForm(); forgotPassword = !forgotPassword">
-            <span v-if="forgotPassword">&laquo; Login</span><span v-else>Forgot Password</span>
+            <span v-if="forgotPassword">
+              &laquo; Login
+            </span><span v-else>
+              Forgot Password
+            </span>
           </a>
           <!-- </a> &nbsp;·&nbsp; -->
           <!-- <a href="../">
