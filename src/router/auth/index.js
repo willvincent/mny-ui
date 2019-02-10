@@ -8,6 +8,14 @@ export default [
     },
   },
   {
+    path: '/account-activation/*',
+    name: 'Account Activation',
+    component: () => import(/* webpackChunkName: "auth-email-verification" */ '@/views/Auth/EmailVerification.vue'),
+    meta: {
+      auth_route: true,
+    },
+  },
+  {
     path: '/verify-email/*',
     name: 'Verify Email',
     component: () => import(/* webpackChunkName: "auth-email-verification" */ '@/views/Auth/EmailVerification.vue'),

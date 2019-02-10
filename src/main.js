@@ -14,6 +14,23 @@ Vue.use(Buefy)
 import Snackbar from './components/buefy-overrides/Snackbar'
 Vue.use(Snackbar)
 
+Vue.filter('capitalize', function (value) {
+  if (!value) return ''
+  value = value.toString()
+  return value.charAt(0).toUpperCase() + value.slice(1)
+})
+
+Vue.filter('accountTypes', function (value) {
+  if (!value) return ''
+  switch (value) {
+    case 'ADMIN':
+      return 'Administrator';
+    case 'CLIENT':
+      return 'Client';
+    default:
+      return value;
+  }
+})
 
 new Vue({
   router,

@@ -39,6 +39,15 @@ export async function getUser(uid) {
 }
 
 /**
+ * Create a new user, with profile data
+ * @param data
+ * @param options
+ */
+export async function createUser(data, options) {
+  return apiCall('POST', '/users', null, data, options);
+}
+
+/**
  * Update a user
  * @param uid
  * @param data
