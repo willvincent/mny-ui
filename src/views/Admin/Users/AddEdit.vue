@@ -126,7 +126,7 @@ export default {
             console.log(error)
           }
         } else {
-          this.user = { type: 'CLIENT', account_status: 'pending', phone_numbers: [] }
+          this.user = { type: 'CLIENT', account_status: 'pending', addresses: [], phone_numbers: [] }
         }
       },
       immediate: true,

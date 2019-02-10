@@ -47,11 +47,8 @@
       </treeselect>
     </b-field>
 
-    <section>
-      <div v-for="(phone, index) of user.phone_numbers" :key="index">
-        <phone-number :phone="phone" />
-      </div>
-    </section>
+    <addresses :addresses="user.addresses" />
+    <phone-numbers :numbers="user.phone_numbers" />
   </section>
 </template>
 
@@ -59,11 +56,13 @@
 import { getPracticeAreas } from '@/api/practice-areas';
 import { getIndustries } from '@/api/industries';
 import Treeselect from '@riophae/vue-treeselect';
-import PhoneNumber from '@/components/user/PhoneNumber.vue';
+import Addresses from '@/components/user/Addresses.vue';
+import PhoneNumbers from '@/components/user/PhoneNumbers.vue';
 
 export default {
   components: {
-    PhoneNumber,
+    Addresses,
+    PhoneNumbers,
     Treeselect
   },
   props: {
