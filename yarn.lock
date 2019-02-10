@@ -2091,6 +2091,11 @@ cleave.js@^0.7.15:
   resolved "http://registry.npm.taobao.org/cleave.js/download/cleave.js-0.7.23.tgz#55a6906fb60f611276aab9c0def726ee8530c49b"
   integrity sha1-VaaQb7YPYRJ2qrnA3vcm7oUwxJs=
 
+cleave.js@^1.4.7:
+  version "1.4.7"
+  resolved "http://registry.npm.taobao.org/cleave.js/download/cleave.js-1.4.7.tgz#5e94f4880946aa778b55ecaafc76d122600ff4d0"
+  integrity sha1-XpT0iAlGqneLVeyq/HbRImAP9NA=
+
 cli-cursor@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/cli-cursor/download/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"

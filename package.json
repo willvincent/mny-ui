@@ -13,6 +13,7 @@
     "@riophae/vue-treeselect": "^0.0.38",
     "axios": "^0.18.0",
     "buefy": "^0.7.2",
+    "cleave.js": "^1.4.7",
     "lodash": "^4.17.11",
     "vue": "^2.5.21",
     "vue-cleave": "^1.2.2",
