@@ -33,9 +33,9 @@
             </b-select>
           </div>
           <div class="level-item">
-            <a class="button is-light">
+            <div class="button is-light" @click.prevent="save">
               {{ uid ? 'Save' : 'Create' }} User
-            </a>
+            </div>
           </div>
           <div class="level-item">
             <a
@@ -77,19 +77,30 @@
         v-else-if="user.type === 'CPA' && activeTab === 1"
         :user="user"
       />
-      <pre>{{ user }}</pre>
-
     </section>
   </div>
 </template>
 
 <script>
-import { getUser } from '@/api/users';
+import { getUser, createUser, updateUser } from '@/api/users';
 import UserAccountForm from '@/components/user/UserAccountForm.vue';
 import UserProfileFormAdmin from '@/components/user/UserProfileFormAdmin.vue';
 import UserProfileFormClient from '@/components/user/UserProfileFormClient.vue';
 import UserProfileFormCpa from '@/components/user/UserProfileFormCpa.vue';
 
+
+const emptyUser = () => {
+  return {
+    type: 'CPA',
+    account_status: 'pending',
+    profile: {
+      phones: [],
+      addresses: [],
+      practice_areas: [],
+      industries: [],
+    }
+  }
+}
 
 export default {
   components: {
@@ -112,7 +123,8 @@ export default {
         { id: 'ADMIN', label: 'Administrator' },
         { id: 'CPA', label: 'CPA' },
         { id: 'CLIENT', label: 'Client' },
-      ]
+      ],
+      welcomeEmail: false,
     }
   },
   watch: {
@@ -121,22 +133,61 @@ export default {
         if (uid > 0) {
           try {
             this.user = await getUser(uid)
+            if (!this.user.profile) {
+              this.user.profile = {
+                phones: [],
+                addresses: [],
+                practice_areas: [],
+                industries: [],
+              }
+            }
           }
           catch (error) {
             console.log(error)
           }
         } else {
-          this.user = { type: 'CLIENT', account_status: 'pending', addresses: [], phone_numbers: [] }
+          this.user = emptyUser()
         }
       },
       immediate: true,
     }
   },
-  async mounted() {
-    // this.options = await practiceAreas();
-  },
   methods: {
+    async save() {
+      if (this.uid) {
+        // update user
+        try {
+          const result = await updateUser(this.uid, this.user)
 
+          this.$toast.open({
+            type: 'is-primary',
+            message: result.message,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+        this.$router.push('/admin/users/user-list')
+      } else {
+        // Do validation
+        // Ask whether to send welcome email
+        this.welcomeEmail = await new Promise(resolve => {
+          this.$dialog.confirm({
+            title: 'Send Welcome Email',
+            message: `If you select "Yes" an email welcoming the user to the application, with a link to activate their account will be dispatched to ${this.user.email}. Otherwise the account will be created, but no email will be generated.`,
+            confirmText: 'Yes',
+            cancelText: 'No',
+            type: 'is-primary',
+            onConfirm: () => resolve(true),
+            onCancel: () => resolve(false),
+          })
+        })
+
+        // create user
+
+        // display success message
+        // redirect to user list
+      }
+    }
   }
 }
 </script>

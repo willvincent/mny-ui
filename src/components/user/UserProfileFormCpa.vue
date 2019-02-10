@@ -1,5 +1,48 @@
 <template>
   <section class="no-top">
+    <b-field horizontal label="Employee Information" class="pad-top">
+      <b-field label="Staff ID" custom-class="is-small">
+        <b-input v-model="profile.staff_number" />
+      </b-field>
+      <b-field label="Hire Date" custom-class="is-small">
+        <b-datepicker
+          v-model="profile.start_date"
+          placeholder="Click to select..."
+          icon="calendar-today">
+        </b-datepicker>
+      </b-field>
+      <b-field label="Global Rate" custom-class="is-small">
+        <b-input v-model="global_rate" icon="currency-usd" v-cleave="masks.money" />
+      </b-field>
+
+    </b-field>
+    <b-field horizontal label="Personal Details" class="pad-top">
+      <b-field label="Professional Title" custom-class="is-small">
+        <b-input v-model="profile.title" />
+      </b-field>
+      <b-field label="SSN" custom-class="is-small">
+        <b-input v-model="profile.ssn" v-cleave="masks.ssn" />
+      </b-field>
+      <b-field label="Date of Birth" custom-class="is-small">
+        <b-datepicker
+          v-model="profile.dob"
+          placeholder="Click to select..."
+          icon="calendar-today">
+        </b-datepicker>
+      </b-field>
+    </b-field>
+    <b-field horizontal label="Spouse" class="pad-top">
+      <b-field label="Name" custom-class="is-small">
+        <b-input v-model="profile.spouse_name" />
+      </b-field>
+      <b-field label="Phone Number" custom-class="is-small">
+        <b-input v-model="profile.spouse_phone" v-cleave="masks.phone" />
+      </b-field>
+    </b-field>
+
+    <phone-numbers :numbers="profile.phones" />
+    <addresses :addresses="profile.addresses" />
+
     <b-field horizontal label="Practice Areas" class="pad-top-pt3">
       <treeselect
         v-model="selectedPracticeAreas"
@@ -46,18 +89,17 @@
         </label>
       </treeselect>
     </b-field>
-
-    <addresses :addresses="user.addresses" />
-    <phone-numbers :numbers="user.phone_numbers" />
   </section>
 </template>
 
 <script>
+import Vue from 'vue';
 import { getPracticeAreas } from '@/api/practice-areas';
 import { getIndustries } from '@/api/industries';
 import Treeselect from '@riophae/vue-treeselect';
 import Addresses from '@/components/user/Addresses.vue';
 import PhoneNumbers from '@/components/user/PhoneNumbers.vue';
+import cleave from '@/directives/cleave';
 
 export default {
   components: {
@@ -65,10 +107,19 @@ export default {
     PhoneNumbers,
     Treeselect
   },
+  directives: {
+    cleave
+  },
   props: {
     user: {
       type: Object,
       default: () => {},
+    }
+  },
+  computed: {
+    global_rate: {
+      get() { return Number.isInteger(this.profile.global_rate) ? (this.profile.global_rate / 100).toFixed(2) : null },
+      set(val) { this.profile.global_rate = Math.round(val * 100) },
     }
   },
   data() {
@@ -77,6 +128,23 @@ export default {
       practiceAreas: [],
       selectedIndustries: [],
       selectedPracticeAreas: [],
+      masks: {
+        phone: {
+          numericOnly: true,
+          blocks: [0, 3, 3, 4],
+          delimiters: ["(", ") ", "-"]
+        },
+        ssn: {
+          numericOnly: true,
+          blocks: [3, 2, 4],
+          delimiters: ["-", "-"]
+        },
+        money: {
+          numeral: true,
+          numeralThousandsGroupStyle: 'thousand'
+        }
+      },
+      profile: {},
     }
   },
   methods: {
@@ -90,6 +158,15 @@ export default {
       return label;
     },
   },
+  watch: {
+    user: {
+      handler(user) {
+        this.profile = Vue.observable(user.profile)
+      },
+      immediate: true,
+    },
+  },
+
   async created() {
     const practiceAreas = await getPracticeAreas();
     this.practiceAreas = practiceAreas;
@@ -100,6 +177,9 @@ export default {
 </script>
 
 <style lang="scss">
+  .pad-top .field-label {
+    padding-top: 1.85rem;
+  }
   .pad-top-pt3 .field-label {
     padding-top: .3rem;
   }

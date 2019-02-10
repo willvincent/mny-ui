@@ -1,34 +1,54 @@
 
 <template>
   <section>
-      <b-field horizontal label="Phone Numbers">
+      <b-field horizontal label="Phone Numbers" :class="{'columns': phones.length < 1}">
+        <div class="column is-full" v-if="phones.length < 1">
+          <section class="section empty-phones">
+            <div class="content has-text-grey has-text-centered">
+              <p>
+                <b-icon
+                  icon="phone-log"
+                  size="is-large"
+                />
+              </p>
+              <p>No phone numbers found.</p>
+            </div>
+          </section>
+          <div class="has-text-right">
+            <a class="button is-dark" @click="addEmptyPhone">
+              <b-icon icon="plus-circle" />
+              <span> Add Phone Number</span>
+            </a>
+          </div>
+        </div>
         <b-table
-          :data="phone_numbers"
+          v-else
+          :data="phones"
         >
           <template slot-scope="{ row, index }">
             <b-table-column
               field="name"
               label="Name"
             >
-              <b-input v-model="phone_numbers[index].name" />
+              <b-input v-model="phones[index].name" />
             </b-table-column>
             <b-table-column
               field="number"
               label="Number"
             >
-              <b-input v-model="phone_numbers[index].number" v-cleave="masks.phone" />
+              <b-input v-model="phones[index].number" v-cleave="masks.phone" />
             </b-table-column>
             <b-table-column
               field="extension"
               label="Extension"
             >
-              <b-input v-model="phone_numbers[index].extension" />
+              <b-input v-model="phones[index].extension" />
             </b-table-column>
             <b-table-column
               field="type"
               label="Type"
             >
-              <b-select v-model="phone_numbers[index].type">
+              <b-select v-model="phones[index].type">
                 <option v-for="option of phoneTypes" :key="option.id" :value="option.id">{{ option.label }}</option>
               </b-select>
             </b-table-column>
@@ -38,20 +58,6 @@
                 <span> Remove</span>
               </a>
             </b-table-column>
-          </template>
-
-          <template slot="empty">
-            <section class="section">
-              <div class="content has-text-grey has-text-centered">
-                <p>
-                  <b-icon
-                    icon="phone-log"
-                    size="is-large"
-                  />
-                </p>
-                <p>No phone numbers found.</p>
-              </div>
-            </section>
           </template>
 
           <template slot="footer">
@@ -78,12 +84,12 @@ export default {
   props: {
     numbers: {
       type: Array,
-      default: [],
+      default: () => [],
     }
   },
   data() {
     return {
-      phone_numbers: [],
+      phones: [],
       phoneTypes: [
         { id: 'HOME', label: 'Home' },
         { id: 'MOBILE', label: 'Mobile' },
@@ -103,7 +109,7 @@ export default {
 
   methods: {
     addEmptyPhone() {
-      this.phone_numbers.push({
+      this.phones.push({
         name: null,
         number: null,
         type: 'HOME',
@@ -111,17 +117,30 @@ export default {
       });
     },
     removePhone(index) {
-      this.phone_numbers.splice(index, 1);
+      this.phones.splice(index, 1);
     }
   },
 
   watch: {
     numbers: {
       handler(numbers) {
-        this.phone_numbers = Vue.observable(numbers)
+        this.phones = Vue.observable(numbers)
       },
       immediate: true
     }
   }
 }
 </script>
+
+<style lang="scss">
+  .columns .field-label label.label {
+    padding-top: .5em;
+  }
+  .empty-phones {
+    background: white;
+    border-bottom: 2px solid #dbdbdb;
+  }
+  .column .has-text-right {
+    padding: .75em 1em 0;
+  }
+</style>

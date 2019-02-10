@@ -86,7 +86,7 @@
           label="Type"
           sortable
         >
-          {{ props.row.type }}
+          {{ props.row.type | accountTypes }}
         </b-table-column>
 
         <b-table-column
@@ -94,7 +94,10 @@
           label="Status"
           sortable
         >
-          {{ props.row.account_status }}
+          <div class="tag">
+            <b-icon icon="shield" size="is-small" :type="statusType(props.row.account_status)" />
+            <span> {{ props.row.account_status | capitalize }}</span>
+          </div>
         </b-table-column>
 
         <b-table-column
@@ -219,6 +222,16 @@ export default {
   },
 
   methods: {
+    statusType(status) {
+      switch (status) {
+        case 'active':
+          return 'is-primary';
+        case 'pending':
+          return 'is-warning';
+        case 'disabled':
+          return 'is-danger';
+      }
+    },
     changeSort(sort, direction) {
       this.sort = sort;
       this.direction = direction;

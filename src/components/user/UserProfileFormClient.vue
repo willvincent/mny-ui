@@ -1,5 +1,8 @@
 <template>
-  <h1>CLIENT profile form</h1>
+  <section>
+    <h1>CLIENT profile goes here</h1>
+    <h3>Contents TBD</h3>
+  </section>
 </template>
 
 <script>

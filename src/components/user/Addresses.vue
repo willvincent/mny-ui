@@ -73,7 +73,7 @@ export default {
   props: {
     addresses: {
       type: Array,
-      default: [],
+      default: () => [],
     }
   },
   data() {

@@ -84,15 +84,23 @@
       label="Password"
     >
       <b-input
-        v-model="password"
+        v-model="account.old_password"
         icon="lock"
-        placeholder="Password"
+        placeholder="Current Password"
         expanded
         type="password"
         password-reveal
       />
       <b-input
-        v-model="password_confirmation"
+        v-model="account.password"
+        icon="lock"
+        placeholder="New Password"
+        expanded
+        type="password"
+        password-reveal
+      />
+      <b-input
+        v-model="account.password_confirmation"
         icon="lock"
         placeholder="Password Confirmation"
         expanded
@@ -113,7 +121,7 @@
       />
 
       <div
-        v-if="passwordSuggestions.length > 0 && password"
+        v-if="passwordSuggestions.length > 0 && account.password"
         class="content has-text-left password-feedback"
       >
         <p
@@ -147,9 +155,10 @@ export default {
   },
   data() {
     return {
-      account: {},
-      password: '',
-      password_confirmation: '',
+      account: {
+        password: '',
+        password_confirmation: '',
+      },
       passwordStrength: 0,
       passwordSuggestions: [],
       passwordWarning: null,
@@ -182,11 +191,11 @@ export default {
     }
   },
   watch: {
-    password(value) {
+    'account.password'(value) {
       if (typeof this.zxcvbn === 'function') {
         const strength = this.zxcvbn(value)
         this.passwordStrength = strength.score * 25;
-        if (strength.score === 0 && this.password) {
+        if (strength.score === 0 && this.account.password) {
           this.passwordStrength = 7;
         }
         this.passwordSuggestions = strength.feedback.suggestions;
