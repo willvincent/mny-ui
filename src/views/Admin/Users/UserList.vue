@@ -54,7 +54,7 @@
           label="First"
           sortable
         >
-          {{ props.row.first_name }}
+          {{ props.row.first_name }}{{ props.row.preferred_name ? ` (${props.row.preferred_name})`: '' }}
         </b-table-column>
 
         <b-table-column
