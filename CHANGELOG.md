@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.0-5"></a>
+# [0.2.0-5](https://github.com/willvincent/mny-ui/compare/v0.2.0-4...v0.2.0-5) (2019-02-10)
+
+
+### Features
+
+* **User List:** Add 'preferred name' in parens after legal first name on table if available. ([5d74c2e](https://github.com/willvincent/mny-ui/commit/5d74c2e))
+* User Add/edit form ([#17](https://github.com/willvincent/mny-ui/issues/17)) ([0146e56](https://github.com/willvincent/mny-ui/commit/0146e56))
+
+
+
 <a name="0.2.0-4"></a>
 # [0.2.0-4](https://github.com/willvincent/mny-ui/compare/v0.2.0-3...v0.2.0-4) (2019-02-09)
 
