@@ -19,12 +19,22 @@ section.content {
   border-radius: 4px;
 }
 
+.section.no-top {
+  padding-top: 0;
+}
+
+.section.separate-tab-content .b-tabs .tab-content {
+  display: none !important;
+}
 
 .vue-treeselect__multi-value-item {
   border: 1px dotted $primary-dark;
   color: $primary-darker;
   background: $primary-lightest;
-  font-size: .85rem;
+  font-size: .85rem !important;
+  .vue-treeselect__multi-value-label {
+    white-space: normal;
+  }
   &:hover {
     color: $primary-darkest;
     background: $neutral-lighter;
