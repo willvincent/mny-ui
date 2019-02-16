@@ -133,6 +133,8 @@ export default {
         if (uid > 0) {
           try {
             this.user = await getUser(uid)
+            this.user.profile.start_date = new Date(this.user.profile.start_date)
+            this.user.profile.date_of_birth = new Date(this.user.profile.date_of_birth)
             if (!this.user.profile) {
               this.user.profile = {
                 phones: [],
@@ -143,7 +145,7 @@ export default {
             }
           }
           catch (error) {
-            console.log(error)
+            console.dir(error, {depth:null})
           }
         } else {
           this.user = emptyUser()
@@ -183,9 +185,20 @@ export default {
         })
 
         // create user
+        try {
+          const result = await createUser({
+            ...this.user,
+            welcome_email: this.welcomeEmail,
+          })
 
-        // display success message
-        // redirect to user list
+          this.$toast.open({
+            type: 'is-primary',
+            message: result.message,
+          })
+        } catch (error) {
+          console.log(error)
+        }
+        this.$router.push('/admin/users/user-list')
       }
     }
   }

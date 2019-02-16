@@ -32,10 +32,7 @@ export async function userList({
  * @param options API options
  */
 export async function getUser(uid) {
-  return apiCall(
-    'GET',
-    `/users/${uid}`,
-  );
+  return apiCall('GET', `/users/${uid}`);
 }
 
 /**

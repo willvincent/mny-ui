@@ -12,10 +12,10 @@
         </b-datepicker>
       </b-field>
       <b-field label="Global Rate" custom-class="is-small">
-        <b-input v-model="global_rate" icon="currency-usd" v-cleave="masks.money" />
+        <b-input v-model.lazy="global_rate" icon="currency-usd" v-cleave="masks.money" />
       </b-field>
-
     </b-field>
+
     <b-field horizontal label="Personal Details" class="pad-top">
       <b-field label="Professional Title" custom-class="is-small">
         <b-input v-model="profile.title" />
@@ -25,7 +25,7 @@
       </b-field>
       <b-field label="Date of Birth" custom-class="is-small">
         <b-datepicker
-          v-model="profile.dob"
+          v-model="profile.date_of_birth"
           placeholder="Click to select..."
           icon="calendar-today">
         </b-datepicker>
@@ -40,12 +40,9 @@
       </b-field>
     </b-field>
 
-    <phone-numbers :numbers="profile.phones" />
-    <addresses :addresses="profile.addresses" />
-
     <b-field horizontal label="Practice Areas" class="pad-top-pt3">
       <treeselect
-        v-model="selectedPracticeAreas"
+        v-model="profile.practice_areas"
         :multiple="true"
         :options="practiceAreas"
         :searchable="false"
@@ -68,7 +65,7 @@
     </b-field>
     <b-field horizontal label="Industry Specialties" class="pad-top-pt3">
       <treeselect
-        v-model="selectedIndustries"
+        v-model="profile.industries"
         :multiple="true"
         :options="industries"
         :searchable="false"
@@ -89,6 +86,10 @@
         </label>
       </treeselect>
     </b-field>
+
+    <phone-numbers :numbers="profile.phones" />
+    <addresses :addresses="profile.addresses" />
+
   </section>
 </template>
 
@@ -117,6 +118,7 @@ export default {
     }
   },
   computed: {
+    // TODO: Needs work, this is a bit overzealous, makes editing painful
     global_rate: {
       get() { return Number.isInteger(this.profile.global_rate) ? (this.profile.global_rate / 100).toFixed(2) : null },
       set(val) { this.profile.global_rate = Math.round(val * 100) },
@@ -126,8 +128,6 @@ export default {
     return {
       industries: [],
       practiceAreas: [],
-      selectedIndustries: [],
-      selectedPracticeAreas: [],
       masks: {
         phone: {
           numericOnly: true,
